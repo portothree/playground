@@ -1,7 +1,7 @@
 {
   description = "rust";
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs/nixos-23.11"; };
+    nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
     flake-utils = { url = "github:numtide/flake-utils"; };
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
   };
