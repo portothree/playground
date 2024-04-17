@@ -23,7 +23,7 @@ fn main() -> Result<()> {
 
     while reader.read_line(&mut line)? > 0 {
         if line.contains(&args.pattern) {
-            print!("{}", line);
+            println!("{}", line);
         }
         line.clear();
     }
