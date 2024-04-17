@@ -17,8 +17,6 @@
             hooks = {
               nixfmt.enable = true;
               shfmt.enable = true;
-              clippy.enable = true;
-              cargo-check.enable = true;
             };
           };
         };
