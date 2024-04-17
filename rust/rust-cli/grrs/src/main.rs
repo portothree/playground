@@ -1,3 +1,4 @@
+use anyhow::{Context, Result};
 use clap::Parser;
 use std::fs::File;
 use std::io::prelude::*;
@@ -12,19 +13,19 @@ struct Cli {
     path: std::path::PathBuf,
 }
 
-fn main() -> std::io::Result<()> {
+fn main() -> Result<()> {
     let args = Cli::parse();
-    let file = File::open(&args.path)?;
+    let file = File::open(&args.path)
+        .with_context(|| format!("Could not read file `{}`", args.path.display()))?;
     let mut reader = BufReader::new(file);
 
-    let mut content = String::new();
+    let mut line = String::new();
 
-    reader.read_to_string(&mut content)?;
-
-    for line in content.lines() {
+    while reader.read_line(&mut line)? > 0 {
         if line.contains(&args.pattern) {
-            println!("{}", line);
+            print!("{}", line);
         }
+        line.clear();
     }
 
     Ok(())
