@@ -14,10 +14,15 @@ struct Cli {
     pattern: String,
     #[arg(long)]
     path: std::path::PathBuf,
+    #[command(flatten)]
+    verbose: clap_verbosity_flag::Verbosity,
 }
 
 fn main() -> Result<()> {
-    env_logger::init();
+    let args = Cli::parse();
+    env_logger::Builder::new()
+        .filter_level(args.verbose.log_level_filter())
+        .init();
 
     trace!("Starting up...");
 
@@ -25,7 +30,6 @@ fn main() -> Result<()> {
     sleep(Duration::from_secs(1));
     sp.stop();
 
-    let args = Cli::parse();
     let file = File::open(&args.path)
         .with_context(|| format!("Could not read file `{}`", args.path.display()))?;
 
