@@ -18,6 +18,20 @@ struct Cli {
     verbose: clap_verbosity_flag::Verbosity,
 }
 
+fn find_matches(reader: &mut BufReader<File>, args: &Cli) -> Result<()> {
+    let mut line = String::new();
+
+    while reader.read_line(&mut line)? > 0 {
+        if line.contains(&args.pattern) {
+            println!("{}", line);
+            info!("Pattern found in line: {}", line);
+        }
+        line.clear();
+    }
+
+    Ok(())
+}
+
 fn main() -> Result<()> {
     let args = Cli::parse();
     env_logger::Builder::new()
@@ -37,15 +51,7 @@ fn main() -> Result<()> {
 
     let mut reader = BufReader::new(file);
 
-    let mut line = String::new();
-
-    while reader.read_line(&mut line)? > 0 {
-        if line.contains(&args.pattern) {
-            println!("{}", line);
-            info!("Pattern found in line: {}", line);
-        }
-        line.clear();
-    }
+    find_matches(&mut reader, &args)?;
 
     Ok(())
 }
