@@ -10,4 +10,4 @@ Cargo.lock
 **/*.rs.bk
 *.pdb
 .direnv
-.pre-commit-config.yaml
+/.pre-commit-config.yaml
