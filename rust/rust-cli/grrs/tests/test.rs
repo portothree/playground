@@ -6,7 +6,7 @@ fn find_a_match() {
     let mut reader = BufReader::new(Cursor::new(input));
     let mut writter = Vec::new();
 
-    let result = grrs::find_matches(&mut reader, "lorem", &mut writter);
+    let result = portogrrs::find_matches(&mut reader, "lorem", &mut writter);
 
     assert_eq!(result, "lorem");
 }

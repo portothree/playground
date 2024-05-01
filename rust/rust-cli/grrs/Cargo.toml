@@ -1,5 +1,5 @@
 [package]
-name = "portothree-playground-grrs"
+name = "portogrrs"
 version = "0.1.0"
 edition = "2021"
 authors = ["Gustavo Porto <gus@p8s.co>"]

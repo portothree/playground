@@ -7,7 +7,7 @@ use std::io::BufReader;
 use std::{thread::sleep, time::Duration};
 
 fn main() -> Result<()> {
-    let args = grrs::Cli::parse();
+    let args = portogrrs::Cli::parse();
     env_logger::Builder::new()
         .filter_level(args.verbose.log_level_filter())
         .init();
@@ -25,7 +25,7 @@ fn main() -> Result<()> {
 
     let mut reader = BufReader::new(file);
 
-    grrs::find_matches(&mut reader, &args.pattern, &mut std::io::stdout());
+    portogrrs::find_matches(&mut reader, &args.pattern, &mut std::io::stdout());
 
     Ok(())
 }
