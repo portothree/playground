@@ -1,8 +1,11 @@
-{ pkgs ? import <nixpkgs> { }, shellHook ? ''
-  EDITOR=vim
-'' }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [ postgresql ];
-  inherit shellHook;
+  shellHook = ''
+    export PGHOST=localhost
+    export PGUSER=postgres
+    export PGPASSWORD=acuriousmoon
+    export PGPORT=5436
+  '';
 }
